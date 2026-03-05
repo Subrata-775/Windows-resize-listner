@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 function App() {
 
   const [windowsize, setwindowsize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
+    width: 0,
+    height: 0
   });
 
   useEffect(() => {
@@ -17,33 +17,23 @@ function App() {
       });
     }
 
+    handleResize(); // set initial size
+
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-    }
+    };
 
   }, []);
 
   return (
     <div className="container">
-
       <div className="card">
-
         <h1 className="title">Window Resize Listener</h1>
-
-        <div className="sizeBox">
-          <h2>Width</h2>
-          <p>{windowsize.width}px</p>
-        </div>
-
-        <div className="sizeBox">
-          <h2>Height</h2>
-          <p>{windowsize.height}px</p>
-        </div>
-
+        <h2>Width: {windowsize.width}px</h2>
+        <h2>Height: {windowsize.height}px</h2>
       </div>
-
     </div>
   );
 }
